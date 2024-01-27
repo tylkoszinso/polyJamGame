@@ -17,6 +17,8 @@ public class EnemyController : MonoBehaviour
 
     bool isEnemyDashing;    
 
+    [SerializeField] private AudioSource enemyDashSFX;
+
     UnityEngine.Vector2 playerToGoalDirection;
     UnityEngine.Vector2 playerPosition;
     UnityEngine.Vector2 enemyPosition;
@@ -49,6 +51,7 @@ public class EnemyController : MonoBehaviour
     IEnumerator Dash()
     {
         isEnemyDashing = true;
+        enemyDashSFX.Play();
         GetComponent<Rigidbody2D>().velocity = UnityEngine.Vector2.zero;
         yield return new WaitForSeconds(0.3f);
         GetComponent<Rigidbody2D>().AddForce(playerToGoalDirection * dashStrenght, ForceMode2D.Impulse);

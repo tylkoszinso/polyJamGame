@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
 {
-    public void StartGameFake()
+    public void StartGame()
     {
         Application.Quit();
     }
@@ -15,8 +15,13 @@ public class ButtonManager : MonoBehaviour
         SceneManager.LoadScene(2);
     }
 
-    public void StartGame()
+    public void QuitGame()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void JednakStartGame()
+    {
+        SceneManager.LoadScene(1);
     }
 }
