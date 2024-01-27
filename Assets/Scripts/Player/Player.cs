@@ -62,6 +62,19 @@ public class Player : MonoBehaviour
             GetComponent<Renderer>().material.color = rollingColor;
             RollPlayer();
         }
+
+        PlayWalkSound();
+    }
+
+    void PlayWalkSound()
+    {
+        if((Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.RightArrow)))
+        {
+            if(!isSoundPlayed)
+            {
+                StartCoroutine(PlayStepSound());
+            }
+        }
     }
 
     void WalkPlayer()
@@ -72,10 +85,7 @@ public class Player : MonoBehaviour
             playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x,playerWalkSpeedUp);
             playerWalkSpeedUp += playerWalkSpeedAddition;
             isPlayerMovementKeyPressed = true;
-            if(!isSoundPlayed)
-            {
-                StartCoroutine(PlayStepSound());
-            }
+            
         }
         if(Input.GetKey(KeyCode.DownArrow))
         {
@@ -83,10 +93,7 @@ public class Player : MonoBehaviour
             playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x,-playerWalkSpeedDown);
             playerWalkSpeedDown += playerWalkSpeedAddition;
             isPlayerMovementKeyPressed = true;
-            if(!isSoundPlayed)
-            {
-                StartCoroutine(PlayStepSound());
-            }
+          
         }
         if(Input.GetKey(KeyCode.LeftArrow))
         {
@@ -94,10 +101,7 @@ public class Player : MonoBehaviour
             playerRigidbody.velocity = new Vector2(-playerWalkSpeedLeft,playerRigidbody.velocity.y);
             playerWalkSpeedLeft += playerWalkSpeedAddition;
             isPlayerMovementKeyPressed = true;
-            if(!isSoundPlayed)
-            {
-                StartCoroutine(PlayStepSound());
-            }
+         
         }
         if(Input.GetKey(KeyCode.RightArrow))
         {
@@ -105,10 +109,7 @@ public class Player : MonoBehaviour
             playerRigidbody.velocity = new Vector2(playerWalkSpeedRight,playerRigidbody.velocity.y);
             playerWalkSpeedRight += playerWalkSpeedAddition;
             isPlayerMovementKeyPressed = true;
-            if(!isSoundPlayed)
-            {
-                StartCoroutine(PlayStepSound());
-            }
+      
         }
         if(!(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.RightArrow)))
         {
@@ -143,7 +144,7 @@ public class Player : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.UpArrow))
         {
-            StopAllCoroutines();
+            StopCoroutine(GraduallyStopPlayer());
             playerRigidbody.AddForce(playerSpeed * Vector2.up, ForceMode2D.Impulse);
             isPlayerMovementKeyPressed = true;
             hasStoppingCoroutineStarted = false;
@@ -155,7 +156,7 @@ public class Player : MonoBehaviour
         }
         if(Input.GetKey(KeyCode.DownArrow))
         {
-            StopAllCoroutines();
+            StopCoroutine(GraduallyStopPlayer());
             playerRigidbody.AddForce(playerSpeed * Vector2.down, ForceMode2D.Impulse);
             isPlayerMovementKeyPressed = true;
             hasStoppingCoroutineStarted = false;
@@ -167,7 +168,7 @@ public class Player : MonoBehaviour
         }
         if(Input.GetKey(KeyCode.LeftArrow))
         {
-            StopAllCoroutines();
+            StopCoroutine(GraduallyStopPlayer());
             playerRigidbody.AddForce(playerSpeed * Vector2.left, ForceMode2D.Impulse);
             isPlayerMovementKeyPressed = true;
             hasStoppingCoroutineStarted = false;
@@ -179,7 +180,7 @@ public class Player : MonoBehaviour
         }
         if(Input.GetKey(KeyCode.RightArrow))
         {
-            StopAllCoroutines();
+            StopCoroutine(GraduallyStopPlayer());
             playerRigidbody.AddForce(playerSpeed * Vector2.right, ForceMode2D.Impulse);
             isPlayerMovementKeyPressed = true;
             hasStoppingCoroutineStarted = false;
@@ -203,7 +204,6 @@ public class Player : MonoBehaviour
     {
         footstepSFX.Play();
         isSoundPlayed = true;
-        print("walking sound started");
         yield return new WaitForSeconds(0.3f);
         isSoundPlayed = false;
     }
