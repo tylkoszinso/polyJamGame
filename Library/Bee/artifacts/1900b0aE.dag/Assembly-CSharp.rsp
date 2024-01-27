@@ -374,8 +374,9 @@
 -analyzer:"C:/Program Files/Unity 2022.3.16f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity 2022.3.16f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Scripts/Enemy/EnemyController.cs"
-"Assets/Scripts/Enemy/Goal.cs"
-"Assets/Scripts/Enemy/Player.cs"
+"Assets/Scripts/Menu/ButtonManager.cs"
+"Assets/Scripts/Pitch/Goal.cs"
+"Assets/Scripts/Player/Player.cs"
 -langversion:9.0
 
 /deterministic
